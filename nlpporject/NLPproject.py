@@ -18,7 +18,7 @@ def getChinese():
 	lines = []
 	for i in line:
 		lines.append(re.sub("\W", " ", i))
-	print(lines)
+	# print(lines)
 	line2 = []
 	for i in lines:
 		line2.append(" ".join(i.split()))
@@ -27,30 +27,27 @@ def getChinese():
 	file.close()
 	return line2
 a = getChinese()
-print(a)
+# print(a)
 nopunc = open('nopuncoriginal', 'w', encoding="utf8")
 for i in range(len(a)):
 	nopunc.write(a[i])
 	nopunc.write('\n')
 nopunc.close()
 
+
 #80 20 split
 with open("nopuncoriginal", "r") as f:
 	data = f.read().split('\n')
-
-random.shuffle(data)
-#print(data)
-train_data = data[:80]
-test_data = data[20:]
-# print(train_data)
-# print(test_data)
-
-train = open('traindataOriginal', 'w', encoding="utf8")
-# train.write((train_data))
-for i in range(len(train_data)):
-	train.write(train_data[i])
-test = open('testdataOriginal', 'w', encoding="utf8")
-# test.write((test_data))
-for i in range(len(test_data)):
-	test.write(test_data[i])
-
+	# data = f.read()
+	X_test, X_train = train_test_split(data, test_size=0.80, train_size=0.20, shuffle=True) #random_state=101
+	f.close()
+print(X_test)
+print(X_train)
+smallTest = open('traindataOriginal', 'w', encoding="utf8")
+for i in range(len(X_test)):
+	smallTest.write(X_test[i])
+	smallTest.write('\n')
+smallTrain = open('testdataOriginal', 'w', encoding="utf8")
+for i in range(len(X_train)):
+	smallTrain.write(X_train[i])
+	smallTrain.write('\n')

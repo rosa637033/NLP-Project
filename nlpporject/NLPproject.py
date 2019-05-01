@@ -14,8 +14,13 @@ chinToken.cut_f("UN.en-zh.zh", 'tokenizedOriginal.txt')
 def getChinese():
 	file = open('tokenizedOriginal.txt', "r", encoding="utf8")
 	context = file.read()
+	ext = (re.sub(r'\（.*?\）', '', context))
+	ext = (re.sub(r'\(.+?\)', '', ext))
+	ext = (re.sub(r'/\A\/', '', ext))
+	ext = ext.replace("A", '')
+
 	#for line in context:
-	line = context.split('\n')
+	line = ext.split('\n')
 	lines = []
 	for i in line:
 		lines.append(re.sub("\W", " ", i))

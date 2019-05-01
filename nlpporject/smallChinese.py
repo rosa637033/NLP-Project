@@ -1,10 +1,12 @@
 from __future__ import print_function
 import torch
 import thulac
-import re, string
+import re
+import string
 import shutil
 import random
 import numpy as np
+import sys
 from sklearn.model_selection import train_test_split
 
 # with open("UN.en-zh.zh") as f:
@@ -21,16 +23,21 @@ from sklearn.model_selection import train_test_split
 # f = open("smallChineseNoPunc", "w", encoding="utf8")
 # f.write(a)
 
-chinToken = thulac.thulac(seg_only=True, T2S=True, filt=True, deli='_')
-chinToken.cut_f("smallChinese", "tokenizedChinese")
-def getChinese():
-	file = open('tokenizedChinese', "r", encoding="utf8")
-	context = file.read()
-	#for line in context:
-	line = context.split('\n')
-	lines = []
-	for i in line:
-		lines.append(re.sub("\W", " ", i))
+# chinToken = thulac.thulac(seg_only=True, T2S=True, filt=True, deli='_')
+# chinToken.cut_f("smallChinese", "tokenizedChinese")
+# def getChinese():
+# 	file = open('tokenizedChinese', "r", encoding="utf8")
+# 	context = file.read().split('\n')
+# 	a=r'\（.*?\）'
+# 	ext = re.sub(a, '', context)
+# 	print(ext)
+	# for line in context:
+
+	# line = context.split('\n')
+	# lines = []
+	# for i in line:
+	# 	lines.append(re.sub("\W", " ", i))
+
 	# print(lines)
 	# filtrate = re.compile(u'[^\u4E00-\u9FA5]') # non-Chinese unicode range
 	#
@@ -56,20 +63,22 @@ def getChinese():
 	# line = re.sub("“", " ", line)
 	# line = re.sub("\(", " ", line)
 	# line = re.sub("\)", " ", line)
+'''
 	line2 = []
 	for i in lines:
 		line2.append(" ".join(i.split()))
+'''
 	
 	#context = filtrate.sub(r'', context) # remove all non-Chinese characters
-	file.close()
-	return line2
-a = getChinese()
+	# file.close()
+	# return line2
+# a = getChinese()
 # print(a)
-nopunc = open('nopunc', 'w', encoding="utf8")
-for i in range(len(a)):
-	nopunc.write(a[i])
-	nopunc.write('\n')
-nopunc.close()
+# nopunc = open('nopunc', 'w', encoding="utf8")
+# for i in range(len(a)):
+# 	nopunc.write(a[i])
+# 	nopunc.write('\n')
+# nopunc.close()
 
 #80 20 split
 '''
@@ -99,7 +108,7 @@ for i in test_data:
 	test.write(i)
 
 '''
-
+'''
 with open("nopunc", "r") as f:
 	data = f.read().split('\n')
 	# data = f.read()
@@ -115,6 +124,7 @@ smallTrain = open('traindata', 'w', encoding="utf8")
 for i in range(len(X_train)):
 	smallTrain.write(X_train[i])
 	smallTrain.write('\n')
+'''
 
 # random.shuffle(data)
 # #print(data)
@@ -131,3 +141,8 @@ for i in range(len(X_train)):
 # # test.write((test_data))
 # for i in range(len(test_data)):
 # 	test.write(test_data[i])
+
+s = '123(45)a啊速度（伤害）有限公司'
+a=r'\（.*?\）'
+ext = re.sub(a, '', s)
+print(ext)
